@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { auth } from "../configs/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const login = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert("Se Inicio sesion correctamente");
+      navigate("/dashboard");
     } catch (err) {
       alert("Error al iniciar sesion");
     }
